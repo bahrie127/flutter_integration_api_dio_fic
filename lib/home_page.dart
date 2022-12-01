@@ -1,4 +1,4 @@
-import 'package:fic_rest_api/models/medical_model.dart';
+import 'package:fic_rest_api/features/product/data/models/medical_model.dart';
 import 'package:fic_rest_api/models/request_model.dart';
 import 'package:fic_rest_api/utils/network_manager.dart';
 import 'package:flutter/material.dart';
