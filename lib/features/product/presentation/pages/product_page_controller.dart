@@ -1,22 +1,23 @@
-import 'package:fic_rest_api/features/product/data/repositories/product_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:fic_rest_api/features/product/data/models/medical_model.dart';
+import 'package:fic_rest_api/features/product/data/repositories/product_repository.dart';
 
 class ProductPageController extends StateNotifier<AsyncValue<List<Medical>?>> {
-  Ref ref;
+  // Ref ref;
+  ProductRepository productRepository;
   ProductPageController(
-    this.ref,
+    this.productRepository,
   ) : super(const AsyncData(null)) {
     getAll();
   }
 
   Future<void> getAll() async {
     state = const AsyncLoading();
-    final response = await ref.read(productRepoProvider).getAll();
+    final response = await productRepository.getAll();
     state = response.fold(
-      (l) => AsyncError(l.toString(), StackTrace.current),
-      (r) => AsyncData(r),
+      (left) => AsyncError(left.toString(), StackTrace.empty),
+      (right) => AsyncData(right),
     );
   }
 }
@@ -24,5 +25,6 @@ class ProductPageController extends StateNotifier<AsyncValue<List<Medical>?>> {
 final productControllerProvider =
     StateNotifierProvider<ProductPageController, AsyncValue<List<Medical>?>>(
         (ref) {
-  return ProductPageController(ref);
+  final repo = ref.read(productRepoProvider);
+  return ProductPageController(repo);
 });
