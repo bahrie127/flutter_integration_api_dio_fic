@@ -1,5 +1,4 @@
-import 'package:fic_rest_api/features/product/data/repositories/product_repository.dart';
-import 'package:fic_rest_api/features/product/presentation/pages/product_page_controller.dart';
+import 'package:fic_rest_api/features/product/presentation/controllers/product_page_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -11,7 +10,6 @@ class ProductPage extends ConsumerStatefulWidget {
 }
 
 class _ProductPageState extends ConsumerState<ProductPage> {
-  
   @override
   Widget build(BuildContext context) {
     final productState = ref.watch(productControllerProvider);
